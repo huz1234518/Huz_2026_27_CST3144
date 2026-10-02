@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>After-School Lesson</title>
+
+    <script defer src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <script defer>
+        window.addEventListener('DOMContentLoaded', function() {
+
+            const { createApp } = Vue
+
+            const myApp = createApp({
+                data() {
+                    return {
+                        Student: "Huzaifa",
+                        Subject: "Information Technology",
+                        Location: "BG_(Bounds Green 01)",
+                        Price: 650,
+                        image: "images/Middlesex_University.jpg",
+                        alt: "University Campus"
+                    }
+                }
+            })
+
+            myApp.mount('#app')
+
+        })
+    </script>
+</head>
+
+<body>
+
+    <div id="app">
+
+        <h1>
+            Good day {{ Student }}. Here are your After-School Lesson details and Information
+        </h1>
+
+        <p>
+            The subject of the lesson is {{ Subject }}.
+        </p>
+
+        <p>
+            The location of the lesson is {{ Location }}.
+        </p>
+
+        <p>
+            The price of the lesson is ${{ Price }}.
+        </p>
+
+        <p>
+            Here is a picture of the lesson campus:
+        </p>
+
+        <img v-bind:src="image"
+             v-bind:alt="alt"
+             width="650">
+
+    </div>
+
+</body>
+</html>
+```
