@@ -17,10 +17,35 @@
                     return {
                         Student: "Huzaifa",
                         Subject: "Information Technology",
+                        ID: 180629,
                         Location: "BG_(Bounds Green 01)",
                         Price: 650,
+                        availability: 5,
+                        cart: [],
+                        displayCart: false,
                         image: "images/Middlesex_University.jpg",
                         alt: "University Campus"
+                    }
+                },
+
+                methods: {
+                    addToCart() {
+                        this.cart.push(this.ID)
+                        this.availability--
+                    },
+
+                    toggleCart() {
+                        this.displayCart = !this.displayCart
+                    }
+                },
+
+                computed: {
+                    canAddToCart() {
+                        return this.availability > 0
+                    },
+
+                    numberOfItems() {
+                        return this.cart.length
                     }
                 }
             })
@@ -35,34 +60,72 @@
 
     <div id="app">
 
-        <h1>
-            Good day {{ Student }}. Here are your After-School Lesson details and Information. Please do not forget to select availability
-        </h1>
+        <div v-if="!displayCart">
+            <h1>
+                Good day {{ Student }}. Here are your After-School Lesson details and Information.
+            </h1>
 
-        <p>
-            The subject of the lesson is {{ Subject }}.
-        </p>
+            <p>
+                The subject of the lesson is {{ Subject }}.
+            </p>
 
-        <p>
-            The location of the lesson is {{ Location }}.
-        </p>
+            <p>
+                The ID of the lesson is: {{ ID }}.
+            </p>
 
-        <p>
-            The price of the lesson is ${{ Price }}.
-        </p>
+            <p>
+                The location of the lesson is {{ Location }}.
+            </p>
 
-        <p>
-            Here is a picture of the lesson campus:
-        </p>
-            Availability:
-        <p>
+            <p>
+                The price of the lesson is ${{ Price }}.
+            </p>
 
-        <img v-bind:src="image"
-             v-bind:alt="alt"
-             width="650">
+            <p>
+                Availability: {{ availability }} slots available.
+            </p>
+
+            <p>
+                Here is a picture of the lesson campus:
+            </p>
+
+            <img v-bind:src="image"
+                 v-bind:alt="alt"
+                 width="350">
+
+            <br><br>
+
+            <button v-on:click="addToCart"
+                    v-bind:disabled="!canAddToCart">
+                Add to Cart
+            </button>
+
+            <p>
+                Items in cart: {{ numberOfItems }}
+            </p>
+        </div>
+
+        <div v-else>
+            <h2>Checkout</h2>
+
+            <p>
+                Sure you want to Checkout?
+            </p>
+
+            <p>
+                Items in cart: {{ numberOfItems }}
+            </p>
+        </div>
+
+        <br> 
+        
+
+        <button v-on:click="toggleCart"
+                v-bind:disabled="numberOfItems === 0">
+            Checkout ({{ numberOfItems }})
+        </button>
 
     </div>
 
 </body>
 </html>
-```
