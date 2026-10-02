@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactivity Examples</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+
+    <div id="div1">
+         
+        <p> Good morning,  {{fullName}}.</p>
+         <p>You have {{unreadEmails}} unread Emails and (???) emails in total. </p>
+
+         <button v-on:click="readEmail()">Read an email</button>
+
+         <button v-bind:disabled="true"> Get more email</button>
+    </div>
+
+      <script type="module">
+        const {createApp} = Vue
+        const myApp1 = createApp({
+            data(){
+                return{
+                    firstName:"Mark",
+                    lastName: "Jones",
+                    unreadEmails:5,
+                    readEmails:100,
+                }
+            },
+            computed:{
+                fullName:function(){
+                    return this.firstName + " " + this.lastName;
+                },
+            },
+            methods:{
+                readEmail(){
+                    this.unreadEmails = this.unreadEmails - 1;
+                },
+            }
+        })
+        myApp1.mount("#div1")
+    </script>
+    
+</body>
+</html>
